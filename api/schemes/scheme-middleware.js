@@ -30,11 +30,13 @@ const validateStep = (req, res, next) => {
     || typeof instructions !== "string" 
     || !step_number 
     || typeof step_number !== "number" 
-    || step_number < 1) {
+    || step_number < 1
+    ) {
       res.status(400).json({message: "invalid step"});
-    } else {
-      next();
     }
+  else {
+      next();
+  }
 };
 
 module.exports = {
