@@ -30,9 +30,9 @@ async function findById(scheme_id) {
       schemeObj.steps = [];
     }
     if (step.step_id) {
-      schemeObj.steps.push({"step_id": step.step_id, "step_number": step.step_number, "instructions": step.instructions})
+      schemeObj.steps.push({"step_id": step.step_id, "step_number": step.step_number, "instructions": step.instructions});
     }
-  })
+  });
 
   return schemeObj;
 }
@@ -42,19 +42,19 @@ async function findSteps(scheme_id) {
     .join("steps as st", "sc.scheme_id", "st.scheme_id")
     .select("st.step_id", "st.step_number", "st.instructions", "sc.scheme_name")
     .where("sc.scheme_id", scheme_id)
-    .orderBy("st.step_number", "asc")
+    .orderBy("st.step_number", "asc");
   
   return steps;
 }
 
 async function add(scheme) { 
-  const [id] = await db("schemes").insert(scheme)
-  return getSchemesById(id)
+  const [id] = await db("schemes").insert(scheme);
+  return getSchemesById(id);
 }
 
 async function addStep(scheme_id, step) {
-  await db("steps").insert({...step, scheme_id})
-  return findSteps(scheme_id)
+  await db("steps").insert({...step, scheme_id});
+  return findSteps(scheme_id);
 }
 
 module.exports = {
