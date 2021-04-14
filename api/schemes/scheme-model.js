@@ -9,6 +9,12 @@ function find() {
     .orderBy("sc.scheme_id", "asc")
 }
 
+function getSchemesById(id) {
+  return db("schemes")
+    .where("scheme_id", id)
+    .first()
+}
+
 async function findById(scheme_id) {
   const scheme = await db("schemes as sc")
     .leftJoin("steps as st", "sc.scheme_id", "st.scheme_id")
@@ -122,6 +128,7 @@ function addStep(scheme_id, step) { // EXERCISE E
 
 module.exports = {
   find,
+  getSchemesById,
   findById,
   findSteps,
   add,
