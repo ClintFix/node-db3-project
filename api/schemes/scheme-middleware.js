@@ -31,7 +31,11 @@ const checkSchemeId = (req, res, next) => {
   }
 */
 const validateScheme = (req, res, next) => {
-
+  if (!req.body.scheme_name || typeof req.body.scheme_name !== "string") {
+    res.status(400).json({message: "invalid scheme_name"});
+  } else {
+    next();
+  }
 }
 
 /*
